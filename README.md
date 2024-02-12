@@ -27,10 +27,12 @@ To install and run this code, you need to do the following
 
        export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home
 
-3. Run `mvn package` from the project directory to package this executable as a JAR file<br/><br/>After this command finishes, you should see a jar file in the target directory:
+3. Run `mvn package -Dmaven.test.skip` from the project directory to package this executable as a JAR file<br/><br/>After this command finishes, you should see a jar file in the target directory:
 
        $ ls target/*.jar
        target/PaymentGatewayMockup-0.0.1-SNAPSHOT.jar
+
+   Note: If you leave off the `-Dmaven.test.skip` argument, some tests will run which will try to connect to the database.  If you want to run these, you can; but you need to have a valid DB connection string in the src/main/resources/application.properties file.<br/><br/>
 
 4. In the CockroachDB cluster, there needs be a database called "payments" (because we're passing "payments" as the DB name in the JDBC URL).  The code will create the necessary tables in this database.<br/><br/>If you need to create this database, here's an example of how to do this:
 
